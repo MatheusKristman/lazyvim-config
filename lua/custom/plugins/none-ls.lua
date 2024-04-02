@@ -5,9 +5,11 @@ return {
   },
   config = function()
     local null_ls = require 'null-ls'
+    local null_ls_utils = require 'null-ls.utils'
     local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
     null_ls.setup {
+      root_dir = null_ls_utils.root_pattern('.null-ls-root', 'Makefile', '.git', 'package.json'),
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettierd.with {
@@ -17,7 +19,9 @@ return {
           prefer_local = true,
         },
         require('none-ls.diagnostics.eslint').with {
-          prefer_local = true,
+          condition = function(utils)
+            return utils.root_has_file { '.eslintrc.js', '.eslintrc.cjs' } -- only enable if root has .eslintrc.js or .eslintrc.cjs
+          end,
         },
       },
       -- AutoFormat on Save
