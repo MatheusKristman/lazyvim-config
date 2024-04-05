@@ -12,6 +12,7 @@ return {
       root_dir = null_ls_utils.root_pattern('.null-ls-root', 'Makefile', '.git', 'package.json'),
       sources = {
         null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prismaFmt,
         null_ls.builtins.formatting.prettierd.with {
           env = {
             PRETTIERD_DEFAULT_CONFIG = vim.fn.expand '~/.config/nvim/utils/linter-config/.prettierrc.json',
