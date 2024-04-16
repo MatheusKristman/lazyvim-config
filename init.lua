@@ -1,3 +1,5 @@
+local add_cmd = vim.api.nvim_create_user_command
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -17,8 +19,17 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
+
 vim.opt.autoindent = true
+vim.opt.smartindent = true
+
+add_cmd('Spacelen4', function()
+    vim.bo.expandtab = true --expand tabs to spaces
+    vim.bo.shiftwidth = 4 --visual mode >,<-key: number of spaces for indendation
+    vim.bo.tabstop = 4    --Tab key: number of spaces for indendation
+    vim.bo.autoindent = true
+    vim.bo.smartindent = true
+end, {})
 
 -- Make line numbers default
 vim.opt.number = true
