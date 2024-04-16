@@ -13,9 +13,12 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- Tab Numbers
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
 
 -- Make line numbers default
 vim.opt.number = true
@@ -78,8 +81,8 @@ vim.opt.scrolloff = 10
 -- Diagnostic Signs
 local signs = { Error = '', Warn = '', Hint = '󰌵', Info = '' }
 for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = 'DiagnosticSign' .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 -- [[ Basic Keymaps ]]
@@ -125,19 +128,19 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+    local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+    vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
@@ -153,99 +156,98 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
-  -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
-  --
-  -- This is often very useful to both group configuration, as well as handle
-  -- lazy loading plugins that don't need to be loaded immediately at startup.
-  --
-  -- For example, in the following configuration, we use:
-  --  event = 'VimEnter'
-  --
-  -- which loads which-key before all the UI elements are loaded. Events can be
-  -- normal autocommands events (`:help autocmd-events`).
-  --
-  -- Then, because we use the `config` key, the configuration only runs
-  -- after the plugin has been loaded:
-  --  config = function() ... end
+    -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
+    --
+    -- This is often very useful to both group configuration, as well as handle
+    -- lazy loading plugins that don't need to be loaded immediately at startup.
+    --
+    -- For example, in the following configuration, we use:
+    --  event = 'VimEnter'
+    --
+    -- which loads which-key before all the UI elements are loaded. Events can be
+    -- normal autocommands events (`:help autocmd-events`).
+    --
+    -- Then, because we use the `config` key, the configuration only runs
+    -- after the plugin has been loaded:
+    --  config = function() ... end
 
-  -- NOTE: Plugins can specify dependencies.
-  --
-  -- The dependencies are proper plugin specifications as well - anything
-  -- you do for a plugin at the top level, you can do for a dependency.
-  --
-  -- Use the `dependencies` key to specify the dependencies of a particular plugin
+    -- NOTE: Plugins can specify dependencies.
+    --
+    -- The dependencies are proper plugin specifications as well - anything
+    -- you do for a plugin at the top level, you can do for a dependency.
+    --
+    -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
-  -- NOTE: Test with none-ls, if go wrong, uncomment this plugins
-  --
-  -- { -- Autoformat
-  --   'stevearc/conform.nvim',
-  --   opts = {
-  --     notify_on_error = false,
-  --     format_on_save = function(bufnr)
-  --       -- Disable "format_on_save lsp_fallback" for languages that don't
-  --       -- have a well standardized coding style. You can add additional
-  --       -- languages here or re-enable it for the disabled ones.
-  --       local disable_filetypes =
-  --         { c = true, cpp = true, javascript = false, javascriptreact = false, typescript = false, typescriptreact = false, lua = false }
-  --       return {
-  --         timeout_ms = 500,
-  --         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-  --       }
-  --     end,
-  --     formatters_by_ft = {
-  --       lua = { 'stylua' },
-  --       -- Conform can also run multiple formatters sequentially
-  --       -- python = { "isort", "black" },
-  --       --
-  --       -- You can use a sub-list to tell conform to run *until* a formatter
-  --       -- is found.
-  --       javascript = { 'prettierd' },
-  --       javascriptreact = { 'prettierd' },
-  --       typescript = { 'prettierd' },
-  --       typescriptreact = { 'prettierd' },
-  --     },
-  --   },
-  -- },
-  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
+    -- NOTE: Test with none-ls, if go wrong, uncomment this plugins
+    --
+    -- { -- Autoformat
+    --   'stevearc/conform.nvim',
+    --   opts = {
+    --     notify_on_error = false,
+    --     format_on_save = function(bufnr)
+    --       -- Disable "format_on_save lsp_fallback" for languages that don't
+    --       -- have a well standardized coding style. You can add additional
+    --       -- languages here or re-enable it for the disabled ones.
+    --       local disable_filetypes =
+    --         { c = true, cpp = true, javascript = false, javascriptreact = false, typescript = false, typescriptreact = false, lua = false }
+    --       return {
+    --         timeout_ms = 500,
+    --         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+    --       }
+    --     end,
+    --     formatters_by_ft = {
+    --       lua = { 'stylua' },
+    --       -- Conform can also run multiple formatters sequentially
+    --       -- python = { "isort", "black" },
+    --       --
+    --       -- You can use a sub-list to tell conform to run *until* a formatter
+    --       -- is found.
+    --       javascript = { 'prettierd' },
+    --       javascriptreact = { 'prettierd' },
+    --       typescript = { 'prettierd' },
+    --       typescriptreact = { 'prettierd' },
+    --     },
+    --   },
+    -- },
+    -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
+    -- init.lua. If you want these files, they are in the repository, so you can just download them and
+    -- place them in the correct locations.
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+    -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
+    --
+    --  Here are some example plugins that I've included in the Kickstart repository.
+    --  Uncomment any of the lines below to enable them (you will need to restart nvim).
+    --
+    -- require 'kickstart.plugins.debug',
+    require 'kickstart.plugins.indent_line',
+    -- require 'kickstart.plugins.lint',
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  { import = 'custom.plugins' },
+    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+    --    This is the easiest way to modularize your config.
+    --
+    --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+    --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
+    { import = 'custom.plugins' },
 }, {
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
+    ui = {
+        -- If you are using a Nerd Font: set icons to an empty table which will use the
+        -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+        icons = vim.g.have_nerd_font and {} or {
+            cmd = '⌘',
+            config = '🛠',
+            event = '📅',
+            ft = '📂',
+            init = '⚙',
+            keys = '🗝',
+            plugin = '🔌',
+            runtime = '💻',
+            require = '🌙',
+            source = '📄',
+            start = '🚀',
+            task = '📌',
+            lazy = '💤 ',
+        },
     },
-  },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
