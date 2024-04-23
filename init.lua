@@ -1,5 +1,7 @@
 local add_cmd = vim.api.nvim_create_user_command
 
+vim.cmd 'autocmd BufNewFile,BufRead *.ejs set filetype=html'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -22,6 +24,9 @@ vim.opt.expandtab = true
 
 vim.opt.autoindent = true
 vim.opt.smartindent = true
+
+-- Enable termguicolors
+vim.opt.termguicolors = true
 
 add_cmd('Spacelen4', function()
     vim.bo.expandtab = true --expand tabs to spaces
