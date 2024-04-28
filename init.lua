@@ -17,9 +17,9 @@ vim.g.have_nerd_font = true
 --  For more options, you can see `:help option-list`
 
 -- Tab Numbers
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 
 vim.opt.autoindent = true
@@ -30,8 +30,8 @@ vim.opt.termguicolors = true
 
 add_cmd('Spacelen4', function()
   vim.bo.expandtab = true --expand tabs to spaces
-  vim.bo.shiftwidth = 2 --visual mode >,<-key: number of spaces for indendation
-  vim.bo.tabstop = 2 --Tab key: number of spaces for indendation
+  vim.bo.shiftwidth = 4 --visual mode >,<-key: number of spaces for indendation
+  vim.bo.tabstop = 4 --Tab key: number of spaces for indendation
   vim.bo.autoindent = true
   vim.bo.smartindent = true
 end, {})
