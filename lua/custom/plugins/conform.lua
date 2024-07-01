@@ -15,7 +15,7 @@ return { -- Autoformat
       -- languages here or re-enable it for the disabled ones.
       local disable_filetypes = { c = true, cpp = true, javascript = false, javascriptreact = false, typescript = false, typescriptreact = false, lua = false }
       return {
-        timeout_ms = 500,
+        timeout_ms = 2500,
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
@@ -32,4 +32,9 @@ return { -- Autoformat
       typescriptreact = { 'prettierd' },
     },
   },
+  config = function(_, opts)
+    local conform = require 'conform'
+
+    conform.setup(opts)
+  end,
 }
