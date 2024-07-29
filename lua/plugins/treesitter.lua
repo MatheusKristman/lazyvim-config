@@ -3,13 +3,13 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require "nvim-treesitter.configs"
 
-        treesitter.setup({
+        treesitter.setup {
             highlight = {
                 enable = true,
             },
-            indent = { enable = true },
+            indent = { enable = false },
             ensure_installed = {
                 "json",
                 "javascript",
@@ -39,8 +39,8 @@ return {
                     node_incremental = "<C-space>",
                     scope_incremental = false,
                     node_decremental = "<bs>",
-                }
-            }
-        })
-    end
+                },
+            },
+        }
+    end,
 }

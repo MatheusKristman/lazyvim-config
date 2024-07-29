@@ -1,16 +1,16 @@
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set backspace=2")
-vim.cmd("set nuw=3")
-vim.cmd("set nu rnu!")
-vim.cmd("set mouse=")
-vim.cmd("set clipboard+=unnamedplus")
+vim.cmd "set expandtab"
+vim.cmd "set tabstop=4"
+vim.cmd "set softtabstop=4"
+vim.cmd "set shiftwidth=4"
+vim.cmd "set backspace=2"
+vim.cmd "set nuw=3"
+vim.cmd "set nu rnu!"
+vim.cmd "set mouse="
+vim.cmd "set clipboard+=unnamedplus"
 
 vim.g.mapleader = " "
 
-vim.opt.fillchars = { eob = " "}
+vim.opt.fillchars = { eob = " " }
 vim.opt.scrolloff = 10
 
 -- keymaps
@@ -27,4 +27,19 @@ keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
 
-require("config.lazy")
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+local yank_group = augroup("HighlightYank", {})
+
+autocmd("TextYankPost", {
+    group = yank_group,
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank {
+            higroup = "IncSearch",
+            timeout = 40,
+        }
+    end,
+})
+
+require "config.lazy"
