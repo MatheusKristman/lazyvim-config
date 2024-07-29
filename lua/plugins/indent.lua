@@ -1,0 +1,16 @@
+return {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    config = function()
+        local ibl = require("ibl")
+        ibl.setup({
+            indent = {
+                char = '┆',
+                tab_char = '┆',
+            },
+            whitespace = {
+                remove_blankline_trail = false,
+            }
+        })
+    end
+}
