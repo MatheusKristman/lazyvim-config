@@ -13,12 +13,13 @@ vim.g.mapleader = " "
 vim.opt.fillchars = { eob = " " }
 vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
+vim.opt.wrap = false
 
 -- keymaps
 
 local keymap = vim.keymap
 
-keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
+keymap.set("n", "<Esc>", ":nohl<CR>", { desc = "Clear search highlights" })
 
 keymap.set("n", "<leader>+", "<C-a>", { desc = "Increment number" })
 keymap.set("n", "<leader>-", "<C-x>", { desc = "Decrement number" })
