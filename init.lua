@@ -1,7 +1,7 @@
 vim.cmd "set expandtab"
-vim.cmd "set tabstop=4"
-vim.cmd "set softtabstop=4"
-vim.cmd "set shiftwidth=4"
+vim.cmd "set tabstop=2"
+vim.cmd "set softtabstop=2"
+vim.cmd "set shiftwidth=2"
 vim.cmd "set backspace=2"
 vim.cmd "set nuw=3"
 vim.cmd "set nu rnu!"
@@ -34,14 +34,14 @@ local augroup = vim.api.nvim_create_augroup
 local yank_group = augroup("HighlightYank", {})
 
 autocmd("TextYankPost", {
-    group = yank_group,
-    pattern = "*",
-    callback = function()
-        vim.highlight.on_yank {
-            higroup = "IncSearch",
-            timeout = 40,
-        }
-    end,
+  group = yank_group,
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank {
+      higroup = "IncSearch",
+      timeout = 40,
+    }
+  end,
 })
 
 require "config.lazy"
