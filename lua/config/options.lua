@@ -34,5 +34,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
 vim.opt.mouse = ""
+vim.opt.guicursor = ""
+vim.opt.colorcolumn = "0"
 
 vim.opt.formatoptions:append({ "r" })

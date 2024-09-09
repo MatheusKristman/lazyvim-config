@@ -6,9 +6,15 @@ return {
     priority = 1000,
   },
   {
+    "rose-pine/neovim",
+    lazy = true,
+    name = "rose-pine",
+    priority = 1000,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "catppuccin-mocha",
     },
   },
 }
