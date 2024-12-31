@@ -6,6 +6,12 @@ return {
     priority = 1000,
   },
   {
+    "mellow-theme/mellow.nvim",
+    lazy = true,
+    name = "mellow",
+    priority = 1000,
+  },
+  {
     "rose-pine/neovim",
     lazy = true,
     name = "rose-pine",
@@ -20,7 +26,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox-material",
+      colorscheme = "mellow",
     },
   },
 }
