@@ -24,9 +24,15 @@ return {
     priority = 1000,
   },
   {
+    "AlexvZyl/nordic.nvim",
+    lazy = true,
+    name = "nordic",
+    priority = 1000,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "mellow",
+      colorscheme = "gruvbox-material",
     },
   },
 }

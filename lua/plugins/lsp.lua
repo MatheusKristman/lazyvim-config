@@ -8,11 +8,12 @@ return {
         "shellcheck",
         "shfmt",
         "tailwindcss-language-server",
-        "typescript-language-server",
+        "vtsls",
         "css-lsp",
         "html-lsp",
         "prisma-language-server",
       })
+      table.insert(opts.ensure_installed, "js-debug-adapter")
     end,
   },
   -- LSP Servers
@@ -21,23 +22,18 @@ return {
     opts = {
       inlay_hints = { enabled = false },
       servers = {
+        vtsls = {
+          settings = {
+            autoUseWorkspaceTsdk = false,
+          },
+        },
         cssls = {},
-        tailwindcss = {
-          root_dir = function(...)
-            return require("lspconfig.util").root_pattern(".git")(...)
-          end,
-        },
-        prismals = {
-          root_dir = function(...)
-            return require("lspconfig.util").root_pattern(".git")(...)
-          end,
-        },
-        tsserver = {
-          root_dir = function(...)
-            return require("lspconfig.util").root_pattern(".git")(...)
-          end,
-          single_file_support = false,
-        },
+        -- tsserver = {
+        --   root_dir = function(...)
+        --     return require("lspconfig.util").root_pattern(".git")(...)
+        --   end,
+        --   single_file_support = false,
+        -- },
         html = {},
         lua_ls = {
           single_file_support = true,
