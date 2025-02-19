@@ -12,6 +12,8 @@ return {
         "css-lsp",
         "html-lsp",
         "prisma-language-server",
+        "docker-compose-language-service",
+        "dockerfile-language-server",
       })
       table.insert(opts.ensure_installed, "js-debug-adapter")
     end,
@@ -98,15 +100,10 @@ return {
             },
           },
         },
+        dockerls = {},
+        docker_compose_language_service = {},
       },
       setup = {},
     },
-  },
-  {
-    "nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
   },
 }

@@ -4,6 +4,9 @@ return {
     lazy = true,
     name = "catppuccin",
     priority = 1000,
+    opts = {
+      transparent_background = true,
+    },
   },
   {
     "mellow-theme/mellow.nvim",
@@ -32,7 +35,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox-material",
+      colorscheme = "catppuccin",
     },
   },
 }
