@@ -23,6 +23,7 @@ return {
       "json",
       "scss",
       "sql",
+      "kdl",
       "vim",
       "lua",
       "dockerfile",
