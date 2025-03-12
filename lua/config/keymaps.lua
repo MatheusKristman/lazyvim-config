@@ -38,3 +38,6 @@ keymap.set("n", "<C-S-l>", "<C-w>-")
 keymap.set("n", "<C-j>", function()
   vim.diagnostic.goto_next()
 end, opts)
+
+keymap.del({ "i", "n", "v" }, "<A-j>")
+keymap.del({ "i", "n", "v" }, "<A-k>")
