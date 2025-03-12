@@ -106,4 +106,7 @@ return {
       setup = {},
     },
   },
+  {
+    "ellisonleao/dotenv.nvim",
+  },
 }
