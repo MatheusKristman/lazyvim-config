@@ -20,32 +20,6 @@ return {
       },
     },
   },
-  -- {
-  --   "telescope.nvim",
-  --   priority = 1000,
-  --   dependencies = {
-  --     {
-  --       "nvim-telescope/telescope-fzf-native.nvim",
-  --       build = "make",
-  --     },
-  --     "nvim-telescope/telescope-file-browser.nvim",
-  --   },
-  --   config = function()
-  --     local telescope = require("telescope")
-  --     local actions = require("telescope.actions")
-  --
-  --     telescope.setup({
-  --       defaults = {
-  --         mappings = {
-  --           i = {
-  --             ["<C-k>"] = actions.move_selection_previous,
-  --             ["<C-j>"] = actions.move_selection_next,
-  --           },
-  --         },
-  --       },
-  --     })
-  --   end,
-  -- },
   {
     "mg979/vim-visual-multi",
   },
@@ -58,77 +32,6 @@ return {
         go_to_definition = "<leader>dx", -- default '<leader>dx'
       },
     },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    dependencies = {
-      {
-        "williamboman/mason.nvim",
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          table.insert(opts.ensure_installed, "js-debug-adapter")
-        end,
-      },
-    },
-    opts = function()
-      local dap = require("dap")
-      if not dap.adapters["pwa-node"] then
-        require("dap").adapters["pwa-node"] = {
-          type = "server",
-          host = "localhost",
-          port = "${port}",
-          executable = {
-            command = "node",
-            -- 💀 Make sure to update this path to point to your installation
-            args = {
-              LazyVim.get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
-              "${port}",
-            },
-          },
-        }
-      end
-      if not dap.adapters["node"] then
-        dap.adapters["node"] = function(cb, config)
-          if config.type == "node" then
-            config.type = "pwa-node"
-          end
-          local nativeAdapter = dap.adapters["pwa-node"]
-          if type(nativeAdapter) == "function" then
-            nativeAdapter(cb, config)
-          else
-            cb(nativeAdapter)
-          end
-        end
-      end
-
-      local js_filetypes = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
-
-      local vscode = require("dap.ext.vscode")
-      vscode.type_to_filetypes["node"] = js_filetypes
-      vscode.type_to_filetypes["pwa-node"] = js_filetypes
-
-      for _, language in ipairs(js_filetypes) do
-        if not dap.configurations[language] then
-          dap.configurations[language] = {
-            {
-              type = "pwa-node",
-              request = "launch",
-              name = "Launch file",
-              program = "${file}",
-              cwd = "${workspaceFolder}",
-            },
-            {
-              type = "pwa-node",
-              request = "attach",
-              name = "Attach",
-              processId = require("dap.utils").pick_process,
-              cwd = "${workspaceFolder}",
-            },
-          }
-        end
-      end
-    end,
   },
   {
     "pteroctopus/faster.nvim",
@@ -151,24 +54,15 @@ return {
     },
   },
   {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = { enabled = false },
+    "3rd/image.nvim",
+    opts = {},
   },
   {
-    "iamcco/markdown-preview.nvim",
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    config = function()
-      vim.keymap.set("n", "<Leader>mp", "<Plug>MarkdownPreview", { desc = "Markdown Preview" })
-    end,
+    "MagicDuck/grug-far.nvim",
+    enabled = false,
   },
   {
-    "tpope/vim-dadbod",
-    dependencies = { "kristijanhusak/vim-dadbod-completion", "kristijanhusak/vim-dadbod-ui" },
+    "folke/flash.nvim",
+    enabled = false,
   },
 }

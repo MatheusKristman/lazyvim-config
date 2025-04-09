@@ -33,7 +33,7 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.splitkeep = "cursor"
-vim.opt.mouse = ""
+-- vim.opt.mouse = ""
 vim.opt.guicursor = ""
 vim.opt.colorcolumn = "0"
 
@@ -41,3 +41,11 @@ vim.opt.formatoptions:append({ "r" })
 
 -- Eslint
 vim.g.lazyvim_eslint_auto_format = true
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "text" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "pt_br"
+  end,
+})
